@@ -1,34 +1,62 @@
 <template>
   <section class="section">
-    <div class="columns is-mobile">
-      <card title="Free" icon="github-circle">
-        Open source on <a href="https://github.com/buefy/buefy"> GitHub</a>
-      </card>
-
-      <card title="Responsive" icon="cellphone-link">
-        <b class="has-text-grey">Every</b> component is responsive
-      </card>
-
-      <card title="Modern" icon="alert-decagram">
-        Built with <a href="https://vuejs.org/">Vue.js</a> and
-        <a href="http://bulma.io/">Bulma</a>
-      </card>
-
-      <card title="Lightweight" icon="arrange-bring-to-front">
-        No other internal dependency
-      </card>
-    </div>
+    <h1 class="title">Gmail URI Generator</h1>
+    <form id="form">
+      <b-field label="To">
+        <b-input v-model="to"></b-input>
+      </b-field>
+      <b-field label="CC">
+        <b-input v-model="cc"></b-input>
+      </b-field>
+      <b-field label="BCC">
+        <b-input v-model="bcc"></b-input>
+      </b-field>
+      <b-field label="Subject">
+        <b-input v-model="subject"></b-input>
+      </b-field>
+      <b-field label="Body">
+        <b-input v-model="body" type="textarea"></b-input>
+      </b-field>
+      <hr />
+      <b-message title="Result">
+        {{ gmailURI }}
+      </b-message>
+    </form>
   </section>
 </template>
 
 <script>
-import Card from '~/components/Card'
-
 export default {
-  name: 'HomePage',
-
-  components: {
-    Card
+  data: function() {
+    return {
+      to: '',
+      cc: '',
+      bcc: '',
+      subject: '',
+      body: ''
+    }
+  },
+  computed: {
+    gmailURI: function() {
+      return (
+        'https://mail.google.com/mail/?view=cm&fs=1' +
+        '&to=' +
+        encodeURIComponent(this.to) +
+        '&cc=' +
+        encodeURIComponent(this.cc) +
+        '&bcc=' +
+        encodeURIComponent(this.bcc) +
+        '&su=' +
+        encodeURIComponent(this.subject) +
+        '&body=' +
+        encodeURIComponent(this.body)
+      )
+    }
+  },
+  methods: {
+    generateURI() {
+      this.$notification.open(this.subject)
+    }
   }
 }
 </script>
