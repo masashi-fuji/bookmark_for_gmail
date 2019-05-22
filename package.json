@@ -1,7 +1,7 @@
 {
-  "name": "bookmark_for_gmail",
+  "name": "Gmail URI Generator",
   "version": "1.0.0",
-  "description": "Generate URI string for Gmail",
+  "description": "Generate URI for Gmail",
   "author": "Masashi Fujiwara",
   "private": true,
   "scripts": {
